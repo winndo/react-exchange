@@ -1,14 +1,49 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.scss';
 
-class App extends Component {
-  render() {
+function Currencies(props) {
     return (
-      <div className="App">
-        Hello W
-      </div>
+        <React.Fragment>
+            Selected Currencies
+            <ul className="currency-list">
+                <li className="item">Currency Item</li>
+            </ul>
+        </React.Fragment>
     );
-  }
+}
+
+function BaseCurrency(props) {
+    return (
+        <div className="base-currency">
+            Base Currency
+        </div>
+    );
+}
+
+function AddCurrency(props) {
+    return(
+        <div className="add-currency">
+            + Add Currency
+        </div>
+    )
+}
+
+class App extends Component {
+    render() {
+        return (
+            <div id="App" className="App">
+                <header id="app-header">
+                    <BaseCurrency/>
+                </header>
+                <div id="main" className="main">
+                    <Currencies/>
+                </div>
+                <footer id="app-footer">
+                    <AddCurrency/>
+                </footer>
+            </div>
+        );
+    }
 }
 
 export default App;
