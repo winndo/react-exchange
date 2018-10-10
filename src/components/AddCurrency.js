@@ -80,17 +80,25 @@ class AddCurrency extends Component {
     }
 
     render() {
+        let {remainingCurrencies: remaining} = this.props;
+        let {selected} = this.state;
+
         if (!this.state.addMode) {
             document.removeEventListener('keydown', this.handleKeydown);
-            return (
-                <a href={'#ADD'} className="add-btn" onClick={this.handleAddBtn}>
-                    + Add Currency
-                </a>
-            );
+            if (remaining.length !== 0) {
+                return (
+                    <a href={'#ADD'} className="add-btn" onClick={this.handleAddBtn}>
+                        + Add Currency
+                    </a>
+                );
+            } else {
+                return (
+                    <div>All supported currencies are on the list</div>
+                )
+            }
+
         } else {
             let filteredCodes;
-            let {remainingCurrencies: remaining} = this.props;
-            let {selected} = this.state;
             if (selected !== '') {
                 let regex = new RegExp('^' + selected, 'i');
                 filteredCodes = remaining.filter(code => {
@@ -121,8 +129,12 @@ class AddCurrency extends Component {
                             </ul>
                         </div>
                     </div>
-                    <input autoFocus maxLength={3} type="text" value={this.state.selected}
-                           onChange={this.handleInputChange}/>
+                    <input autoFocus
+                           maxLength={3}
+                           type="text"
+                           value={this.state.selected}
+                           onChange={this.handleInputChange}
+                    />
                     <button className="btn btn-submit" type="submit" onClick={this.handleSubmitBtn}>submit</button>
                     <button className="btn btn-cancel" type="submit" onClick={this.handleCancelBtn}>cancel</button>
                 </div>

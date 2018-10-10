@@ -8,14 +8,17 @@ describe('AddCurrency', () => {
     const selectedCurrencies = supportedCurrencies.slice(0, 2);
     const remainingCurrencies = supportedCurrencies.slice(2);
     const handleAddClick = jest.fn();
-    const {container, debug} = render(
+    const {container, getByText, debug} = render(
         <AddCurrency
             currencies={selectedCurrencies}
             remainingCurrency={remainingCurrencies}
             addCurrency={handleAddClick}
         />
     );
+    const btnNode = getByText('+ Add Currency');
+
     it('render <div class="add-currency">', () => {
         container.querySelector('div.add-currency')
     });
+    it('add currency', )
 });

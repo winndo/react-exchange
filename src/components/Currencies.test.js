@@ -47,6 +47,10 @@ describe('Currencies', () => {
     );
     const currenciesNode = container.querySelector('ul.currency-list');
 
+    it('render <Currencies />', () => {
+        container.querySelector('ul.currency-list');
+    });
+
     it('render as much selected currencies', () => {
         expect(currenciesNode.childElementCount).toBe(filledCurrencies.length);
     });

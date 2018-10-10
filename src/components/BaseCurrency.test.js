@@ -8,7 +8,7 @@ describe('BaseCurrency', () => {
     const date = '2018-08-08';
     const title = 'United States Dollar';
     const handleChange = jest.fn();
-    
+
     const {container, debug} = render(<BaseCurrency
             title={title}
             code={code}
@@ -17,6 +17,10 @@ describe('BaseCurrency', () => {
             handleChange={handleChange}
         />
     );
+
+    it('render <BaseCurrency />', () => {
+        container.querySelector('div.base-currency');
+    });
 
     it('had props code, date and title', () => {
         const titleNode = container.querySelector('div.title');
