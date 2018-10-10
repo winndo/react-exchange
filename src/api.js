@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 const logName = '[API] ';
 
 const api = {
@@ -25,10 +26,10 @@ const api = {
                         reject(data)
                     }
                 })
-                    .done(function() {
+                    .done(function () {
                         console.log(logName, 'finish getting currency names');
                     })
-                    .fail(function() {
+                    .fail(function () {
                         reject(arguments);
                     });
             });

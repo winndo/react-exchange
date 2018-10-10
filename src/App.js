@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './App.scss';
+import BaseCurrency from './components/BaseCurrency';
 
 function Currencies(props) {
     return (
@@ -16,14 +17,6 @@ function Currencies(props) {
     );
 }
 
-function BaseCurrency(props) {
-    return (
-        <div className="base-currency">
-            Base Currency
-        </div>
-    );
-}
-
 function AddCurrency(props) {
     return(
         <div className="add-currency">
@@ -33,11 +26,28 @@ function AddCurrency(props) {
 }
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            baseCode: "USD",
+            baseValue: 1,
+        };
+        this.handleBaseValueChange = this.handleBaseValueChange.bind(this);
+    }
+    handleBaseValueChange({baseValue}) {
+        this.setState({ baseValue: baseValue });
+    }
     render() {
         return (
             <div id="App">
                 <header id="app-header">
-                    <BaseCurrency/>
+                    <BaseCurrency
+                        title={'United States Dollar'}
+                        code={this.state.baseCode}
+                        date={''}
+                        baseValue={this.state.baseValue}
+                        handleChange={this.handleBaseValueChange}
+                    />
                 </header>
                 <div id="main">
                     <Currencies/>
