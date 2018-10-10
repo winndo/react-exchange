@@ -18,7 +18,7 @@ function BaseCurrency({title, code, date, baseValue, ...props}) {
                 autoFocus
                 className="base-value"
                 type="number"
-                value={baseValue || 1}
+                value={baseValue}
                 onChange={handleInputChange}
                 data-testid="base-value-input"
             />

@@ -1,0 +1,12 @@
+.currency-list {
+  list-style: none;
+  padding: 0;
+}
+.currency-item {
+  animation: added .6s, colormark 3s forwards;
+  border: 2px solid #777;
+  margin: 1em 0;
+  box-shadow: .618em .618em 0 rgba(0, 0, 0, .1);
+  padding: .618em;
+  background-color: #fff;
+}

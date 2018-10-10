@@ -1,0 +1,23 @@
+@keyframes added {
+  from {
+    transform: translateY(30%);
+    opacity: 0;
+    box-shadow: 0 0 0 rgba(0, 0, 0, .1);
+  }
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+    box-shadow: .618em .618em 0 rgba(0, 0, 0, .1);
+  }
+}
+@keyframes colormark {
+  from {
+    background-color: rgb(231, 255, 214);
+    border-color: rgb(231, 255, 214);
+
+  }
+  to {
+    background-color: white;
+    border-color: #777;
+  }
+}

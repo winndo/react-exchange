@@ -2,21 +2,8 @@ import React, {Component} from 'react';
 import './App.scss';
 import api from './api';
 import BaseCurrency from './components/BaseCurrency';
+import Currencies from './components/Currencies';
 
-function Currencies(props) {
-    return (
-        <React.Fragment>
-            Selected Currencies
-            <ul className="currency-list">
-                <li className="item">Currency Item</li>
-                <li className="item">Currency Item</li>
-                <li className="item">Currency Item</li>
-                <li className="item">Currency Item</li>
-                <li className="item">Currency Item</li>
-            </ul>
-        </React.Fragment>
-    );
-}
 
 function AddCurrency(props) {
     return (
@@ -36,9 +23,11 @@ class App extends Component {
             listNames: {},
             date: '',
             rates: {},
+            selectedCurrencies: [],
             loading: true
         };
         this.handleBaseValueChange = this.handleBaseValueChange.bind(this);
+        this.calculateExchange = this.calculateExchange.bind(this);
     }
 
     componentDidMount() {
@@ -64,7 +53,41 @@ class App extends Component {
                     loading: false
                 });
                 return Promise.resolve();
+            })
+            .then(() => {
+                // add initial list
+                this.addCurrency("IDR")
+                    .addCurrency("EUR")
+                    .addCurrency("GBP");
             });
+    }
+
+    has(code) {
+        return this.state.selectedCurrencies.find(
+            currency => currency.code === code
+        );
+    }
+
+    calculateExchange(code) {
+        return this.state.rates[code] * this.state.baseValue;
+    }
+
+    addCurrency(code, callback) {
+        if (this.has(code)) {
+            console.log(`This currency code: ${code}, is already on the list`);
+            return this;
+        }
+        let currencies = this.state.selectedCurrencies.slice();
+        currencies.push({
+            code: code,
+            rate: this.state.rates[code],
+            title: this.state.listNames[code],
+            value: this.calculateExchange(code)
+        });
+        this.setState({
+            selectedCurrencies: currencies
+        }, callback);
+        return this;
     }
 
     handleBaseValueChange({baseValue}) {
@@ -73,7 +96,7 @@ class App extends Component {
 
     render() {
         return (
-            <div id="App">
+            <div id="app">
                 <header id="app-header">
                     <BaseCurrency
                         title={this.state.listNames[this.state.baseCode]}
@@ -87,9 +110,12 @@ class App extends Component {
                     {this.state.loading ? (
                         <div>Loading...</div>
                     ) : (
-                        <Currencies/>
+                        <Currencies
+                            selectedCurrencies={this.state.selectedCurrencies}
+                            calculateExchange={this.calculateExchange}
+                            rates={this.state.rates}
+                        />
                     )}
-
                 </div>
                 <footer id="app-footer">
                     <AddCurrency/>

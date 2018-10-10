@@ -1,20 +1,14 @@
 .base-currency {
   width: 61.8%;
   display: grid;
-  grid-template-areas: "title title date date" "code . input input";
+  grid-template-areas:
+          "title title date date"
+          "code . input input";
   grid-gap: .618em;
-  > .title {
-    grid-area: title;
-  }
-  > .date {
-    grid-area: date;
-  }
-  > .code {
-    grid-area: code;
-  }
-  > input {
-    grid-area: input;
-  }
+  > .title { grid-area: title; }
+  > .date { grid-area: date; }
+  > .code { grid-area: code; }
+  > input { grid-area: input; }
 }
 
 .base-currency {
