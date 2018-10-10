@@ -1,0 +1,91 @@
+@import "variables";
+
+@keyframes move {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.btninput-set {
+  line-height: 1.618em;
+  outline: none;
+  //border: 1px solid #777;
+  padding: 0;
+  border: 1px solid #777;
+  padding-left: .618em;
+}
+
+.add-currency {
+  > .btn-submit {
+    @extend .btninput-set;
+    background-color: #0056b3;
+    color: white;
+    padding-right: .618em;
+    border-radius: 0 50px 50px 0;
+    border-left: 0;
+    &:hover, &:focus {
+      cursor: pointer;
+      background-color: #0070fe;
+    }
+  }
+  > .btn-cancel {
+    @extend .btninput-set;
+    border: 0;
+    padding: 0 1em;
+    background-color: transparent;
+    &:hover, &:focus {
+      cursor: pointer;
+      background-color: whitesmoke;
+    }
+
+  }
+  > input[type="text"] {
+    @extend .btninput-set;
+    border-radius: 50px 0 0 50px;
+  }
+}
+
+.code-list-container {
+  animation: move .3s forwards;
+  position: fixed;
+  bottom: $footer-min-height;
+  left: 0;
+  width: 100%;
+  max-height: 50%;
+  border-top: 2px solid #777;
+  background-color: white;
+  overflow: scroll;
+  > .header {
+    position: static;
+    top: 0;
+    left: 0;
+    background-color: #333;
+    color: white;
+    border-bottom: 2px solid #777;
+    padding: .382em;
+    width: 100%;
+  }
+}
+
+.list-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+.code-list {
+  list-style: none;
+  padding: 1em;
+  > .item a {
+    width: 100%;
+    display: block;
+    margin-bottom: .618em;
+    padding: .382em;
+    &:hover {
+      background-color: whitesmoke;
+    }
+  }
+}

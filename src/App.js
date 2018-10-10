@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
 import './App.scss';
 import api from './api';
+import {ErrorBoundary} from './components/helper';
 import BaseCurrency from './components/BaseCurrency';
 import Currencies from './components/Currencies';
-
-
-function AddCurrency(props) {
-    return (
-        <div className="add-currency">
-            + Add Currency
-        </div>
-    )
-}
+import AddCurrency from './components/AddCurrency';
 
 class App extends Component {
     constructor(props) {
@@ -19,15 +12,17 @@ class App extends Component {
         this.state = {
             baseCode: "USD",
             baseValue: 1,
-            supportedCurrencies: api.currency.supported,
+            supportedCurrencies: api.currency.supported.slice(),
             listNames: {},
             date: '',
             rates: {},
             selectedCurrencies: [],
+            remainingCurrencies: api.currency.supported.slice(),
             loading: true
         };
         this.handleBaseValueChange = this.handleBaseValueChange.bind(this);
         this.calculateExchange = this.calculateExchange.bind(this);
+        this.handleAddClick = this.handleAddClick.bind(this);
     }
 
     componentDidMount() {
@@ -84,8 +79,12 @@ class App extends Component {
             title: this.state.listNames[code],
             value: this.calculateExchange(code)
         });
+        const index = this.state.remainingCurrencies.indexOf(code);
+        let remaining = this.state.remainingCurrencies.slice();
+        remaining.splice(index, 1);
         this.setState({
-            selectedCurrencies: currencies
+            selectedCurrencies: currencies,
+            remainingCurrencies: remaining
         }, callback);
         return this;
     }
@@ -94,33 +93,43 @@ class App extends Component {
         this.setState({baseValue: baseValue});
     }
 
+    handleAddClick(code, callback) {
+        this.addCurrency(code, callback);
+    }
+
     render() {
         return (
-            <div id="app">
-                <header id="app-header">
-                    <BaseCurrency
-                        title={this.state.listNames[this.state.baseCode]}
-                        code={this.state.baseCode}
-                        date={this.state.date}
-                        baseValue={this.state.baseValue}
-                        handleChange={this.handleBaseValueChange}
-                    />
-                </header>
-                <div id="main">
-                    {this.state.loading ? (
-                        <div>Loading...</div>
-                    ) : (
-                        <Currencies
-                            selectedCurrencies={this.state.selectedCurrencies}
-                            calculateExchange={this.calculateExchange}
-                            rates={this.state.rates}
+            <ErrorBoundary>
+                <div id="app">
+                    <header id="app-header">
+                        <BaseCurrency
+                            title={this.state.listNames[this.state.baseCode]}
+                            code={this.state.baseCode}
+                            date={this.state.date}
+                            baseValue={this.state.baseValue}
+                            handleChange={this.handleBaseValueChange}
                         />
-                    )}
+                    </header>
+                    <div id="main">
+                        {this.state.loading ? (
+                            <div>Loading...</div>
+                        ) : (
+                            <Currencies
+                                selectedCurrencies={this.state.selectedCurrencies}
+                                calculateExchange={this.calculateExchange}
+                                rates={this.state.rates}
+                            />
+                        )}
+                    </div>
+                    <footer id="app-footer">
+                        <AddCurrency
+                            currencies={this.state.supportedCurrencies}
+                            remainingCurrencies={this.state.remainingCurrencies}
+                            addCurrency={this.handleAddClick}
+                        />
+                    </footer>
                 </div>
-                <footer id="app-footer">
-                    <AddCurrency/>
-                </footer>
-            </div>
+            </ErrorBoundary>
         );
     }
 }
