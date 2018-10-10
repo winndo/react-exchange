@@ -7,6 +7,10 @@ function Currencies(props) {
             Selected Currencies
             <ul className="currency-list">
                 <li className="item">Currency Item</li>
+                <li className="item">Currency Item</li>
+                <li className="item">Currency Item</li>
+                <li className="item">Currency Item</li>
+                <li className="item">Currency Item</li>
             </ul>
         </React.Fragment>
     );
@@ -31,11 +35,11 @@ function AddCurrency(props) {
 class App extends Component {
     render() {
         return (
-            <div id="App" className="App">
+            <div id="App">
                 <header id="app-header">
                     <BaseCurrency/>
                 </header>
-                <div id="main" className="main">
+                <div id="main">
                     <Currencies/>
                 </div>
                 <footer id="app-footer">

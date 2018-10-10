@@ -1,0 +1,41 @@
+.fixed-layout {
+  position: fixed;
+  width: 100%;
+  max-height: $fixed-min-height;
+  overflow: scroll;
+}
+
+#app-header {
+  @extend .fixed-layout;
+  top: 0;
+  left: 0;
+  background-color: whitesmoke;
+}
+
+#app-footer {
+  @extend .fixed-layout;
+  bottom: 0;
+  left: 0;
+  background-color: whitesmoke;
+  z-index: 100;
+}
+
+#main {
+  margin-top: $fixed-min-height - 20px;
+  margin-bottom: $footer-min-height;
+}
+
+.flex-master {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#root, #app-header, #app-footer {
+  @extend .flex-master;
+}
+
+#app {
+  width: 61.8%;
+}
