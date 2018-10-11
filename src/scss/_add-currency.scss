@@ -1,14 +1,5 @@
 @import "variables";
 
-@keyframes move {
-  from {
-    transform: translateY(100%);
-  }
-  to {
-    transform: translateY(0);
-  }
-}
-
 .btninput-set {
   line-height: 1.618em;
   outline: none;

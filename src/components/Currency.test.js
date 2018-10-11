@@ -21,17 +21,17 @@ describe('Currency', () => {
         raw: 15000,
         formatted: '15,000'
     };
-    const {getByText, debug} = render(<Currency data={data} value={value.raw} rate={rate.raw}/>);
+    const {container, getByText, debug} = render(<Currency code={data.code} title={data.title} value={value.raw} rate={rate.raw}/>);
     it('render code', () => {
         getByText(data.code)
     });
     it('render title', () => {
-        getByText(data.title);
+        container.querySelector('div.title');
     });
     it('render rate', () => {
-        getByText(rate.formatted);
+        container.querySelector('div.rate');
     });
     it('render value', () => {
-        getByText(rate.formatted);
+        container.querySelector('div.value');
     });
 });

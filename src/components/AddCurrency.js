@@ -55,11 +55,9 @@ class AddCurrency extends Component {
     handleKeydown(e) {
         switch (e.keyCode) {
             case 13:
-                console.log('enter');
                 this.add(this.state.selected);
                 break;
             case 27:
-                console.log('esc');
                 this.setState({addMode: false});
                 break;
             default:
@@ -70,7 +68,6 @@ class AddCurrency extends Component {
     handleItemClick(e) {
         e.preventDefault();
         const code = e.target.innerHTML;
-        // console.log('code', code);
         this.add(code);
     }
 
@@ -82,7 +79,6 @@ class AddCurrency extends Component {
     render() {
         let {remainingCurrencies: remaining} = this.props;
         let {selected} = this.state;
-
         if (!this.state.addMode) {
             document.removeEventListener('keydown', this.handleKeydown);
             if (remaining.length !== 0) {
@@ -92,11 +88,8 @@ class AddCurrency extends Component {
                     </a>
                 );
             } else {
-                return (
-                    <div>All supported currencies are on the list</div>
-                )
+                return <div>All supported currencies are on the list</div>;
             }
-
         } else {
             let filteredCodes;
             if (selected !== '') {
@@ -141,7 +134,6 @@ class AddCurrency extends Component {
             )
         }
     }
-
 }
 
 export default AddCurrency;

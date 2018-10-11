@@ -4,17 +4,24 @@ import Currencies from "./Currencies";
 
 describe('Currencies', () => {
     let currenciesList = [];
+    function getName(code) {
+        return listNames[code];
+    }
     it('render currency with no data', () => {
         const {getByText} = render(
             <Currencies
                 selectedCurrencies={currenciesList}
+                getName={getName}
                 calculateExchange={calculateExchange}
                 rates={rates}
             />
         );
         getByText('Please Add Currency');
     });
-
+    const listNames = {
+        'IDR': "Indenesian Rupiah",
+        'EUR': "Euro"
+    };
     const calculateExchange = jest.fn();
     const rates = {
         'IDR': 15291.65,
@@ -24,23 +31,11 @@ describe('Currencies', () => {
         'IDR': '15,291.65',
         'EUR': '0.87'
     };
-    const filledCurrencies = [
-        {
-            code: 'IDR',
-            rate: 15291.65,
-            title: 'Indonesian Rupiah',
-            value: 15291.65
-        },
-        {
-            code: 'EUR',
-            rate: 0.87,
-            title: 'Euro',
-            value: 0.87
-        }
-    ];
+    const filledCurrencies = ['IDR', 'EUR'];
     const {container, getByText, debug} = render(
         <Currencies
             selectedCurrencies={filledCurrencies}
+            getName={getName}
             calculateExchange={calculateExchange}
             rates={rates}
         />
@@ -63,7 +58,7 @@ describe('Currencies', () => {
 
     it('convert rate using rates object', () => {
         const rateEls = container.querySelectorAll('div.rate');
-        expect(rateEls[0].innerHTML).toBe(formattedRates['IDR']);
-        expect(rateEls[1].innerHTML).toBe(formattedRates['EUR']);
+        expect(rateEls[0].innerHTML).toBe('1 USD = ' + formattedRates['IDR'] + ' IDR');
+        expect(rateEls[1].innerHTML).toBe('1 USD = ' + formattedRates['EUR'] + ' EUR');
     });
 });

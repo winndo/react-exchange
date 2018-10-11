@@ -4,14 +4,15 @@ import Currency from './Currency';
 function Currencies({selectedCurrencies, calculateExchange, rates, ...props}) {
     let currencies;
     if (selectedCurrencies.length > 0) {
-        currencies = selectedCurrencies.map(currency => {
-            let {code} = currency;
+        currencies = selectedCurrencies.map(code => {
             return (
                 <Currency
                     key={code}
-                    data={currency}
+                    code={code}
+                    title={props.getName(code)}
                     value={calculateExchange(code)}
                     rate={rates[code]}
+                    handleRemove={props.handleRemove}
                 />
             );
         });

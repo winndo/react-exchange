@@ -23,6 +23,8 @@ class App extends Component {
         this.handleBaseValueChange = this.handleBaseValueChange.bind(this);
         this.calculateExchange = this.calculateExchange.bind(this);
         this.handleAddClick = this.handleAddClick.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
+        this.getName = this.getName.bind(this)
     }
 
     componentDidMount() {
@@ -73,12 +75,7 @@ class App extends Component {
             return this;
         }
         let currencies = this.state.selectedCurrencies.slice();
-        currencies.push({
-            code: code,
-            rate: this.state.rates[code],
-            title: this.state.listNames[code],
-            value: this.calculateExchange(code)
-        });
+        currencies.push(code);
         const index = this.state.remainingCurrencies.indexOf(code);
         let remaining = this.state.remainingCurrencies.slice();
         remaining.splice(index, 1);
@@ -97,6 +94,23 @@ class App extends Component {
         this.addCurrency(code, callback);
     }
 
+    handleRemove(code) {
+        let selected = this.state.selectedCurrencies.slice();
+        const index = selected.indexOf(code);
+        selected.splice(index, 1);
+        let remaining = this.state.remainingCurrencies.slice();
+        remaining.push(code);
+
+        this.setState({
+            selectedCurrencies: selected,
+            remainingCurrencies: remaining
+        });
+    }
+
+    getName(code) {
+        return this.state.listNames[code];
+    }
+
     render() {
         return (
             <ErrorBoundary>
@@ -112,11 +126,13 @@ class App extends Component {
                     </header>
                     <div id="main">
                         {this.state.loading ? (
-                            <div>Loading...</div>
+                            <div className="loading-container">Loading...</div>
                         ) : (
                             <Currencies
                                 selectedCurrencies={this.state.selectedCurrencies}
+                                getName={this.getName}
                                 calculateExchange={this.calculateExchange}
+                                handleRemove={this.handleRemove}
                                 rates={this.state.rates}
                             />
                         )}
