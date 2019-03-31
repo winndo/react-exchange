@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import './App.scss';
-import api from './api';
-import {ErrorBoundary} from './components/helper';
-import BaseCurrency from './components/BaseCurrency';
-import Currencies from './components/Currencies';
-import AddCurrency from './components/AddCurrency';
+import React, { Component } from "react";
+import "./App.scss";
+import api from "./api";
+import { ErrorBoundary } from "./components/helper";
+import BaseCurrency from "./components/BaseCurrency";
+import Currencies from "./components/Currencies";
+import AddCurrency from "./components/AddCurrency";
 
 class App extends Component {
     constructor(props) {
@@ -14,7 +14,7 @@ class App extends Component {
             baseValue: 1,
             supportedCurrencies: api.currency.supported.slice(),
             listNames: {},
-            date: '',
+            date: "",
             rates: {},
             selectedCurrencies: [],
             remainingCurrencies: api.currency.supported.slice(),
@@ -24,11 +24,11 @@ class App extends Component {
         this.calculateExchange = this.calculateExchange.bind(this);
         this.handleAddClick = this.handleAddClick.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
-        this.getName = this.getName.bind(this)
+        this.getName = this.getName.bind(this);
     }
 
     componentDidMount() {
-        this.setState({loading: true});
+        this.setState({ loading: true });
         api.currency
             .listNames()
             .then(names => {
@@ -79,15 +79,18 @@ class App extends Component {
         const index = this.state.remainingCurrencies.indexOf(code);
         let remaining = this.state.remainingCurrencies.slice();
         remaining.splice(index, 1);
-        this.setState({
-            selectedCurrencies: currencies,
-            remainingCurrencies: remaining
-        }, callback);
+        this.setState(
+            {
+                selectedCurrencies: currencies,
+                remainingCurrencies: remaining
+            },
+            callback
+        );
         return this;
     }
 
-    handleBaseValueChange({baseValue}) {
-        this.setState({baseValue: baseValue});
+    handleBaseValueChange({ baseValue }) {
+        this.setState({ baseValue: baseValue });
     }
 
     handleAddClick(code, callback) {
@@ -129,7 +132,9 @@ class App extends Component {
                             <div className="loading-container">Loading...</div>
                         ) : (
                             <Currencies
-                                selectedCurrencies={this.state.selectedCurrencies}
+                                selectedCurrencies={
+                                    this.state.selectedCurrencies
+                                }
                                 getName={this.getName}
                                 calculateExchange={this.calculateExchange}
                                 handleRemove={this.handleRemove}
