@@ -7,12 +7,14 @@ jobs:
       - checkout
       - run: echo "building using yarn"
       - run: yarn
+      - run: CI=true yarn build
   test:
     docker:
       - image: circleci/node:8.9
     steps:
       - checkout
       - run: echo "testing"
+      - run: yarn
       - run: yarn test
 workflows:
   version: 2
