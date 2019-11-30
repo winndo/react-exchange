@@ -1,7 +1,9 @@
 # React Exchange
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e8d8f7c0-0f2b-4b3c-a613-9ec1fa92b47d/deploy-status)](https://app.netlify.com/sites/optimistic-shirley-babf09/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e8d8f7c0-0f2b-4b3c-a613-9ec1fa92b47d/deploy-status)](https://app.netlify.com/sites/react-exchange/deploys)
 
-open [demo 01](https://optimistic-shirley-babf09.netlify.com/) or [demo on https://pleasant-gram.glitch.me/](https://pleasant-gram.glitch.me/)
+Live web app:
+- [https://react-exchange.netlify.com/]https://react-exchange.netlify.com/)
+- [demo on https://pleasant-gram.glitch.me/](https://pleasant-gram.glitch.me/)
 or go to project repository [on github](https://github.com/hantumobil/react-exchange)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
